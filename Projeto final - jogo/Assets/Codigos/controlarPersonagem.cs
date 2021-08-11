@@ -9,12 +9,15 @@ public class controlarPersonagem : MonoBehaviour
 
     int estaAndandoHash;
     int estaCorrendoHash;
+    int estaAtacandoHash;
+    int estaVivoHash;
 
     Controladorpersonagem entrada;
 
     Vector2 movimentoAtual;
     bool movimentoPressionado;
     bool correrPressionado;
+    bool ataquePressionado;
 
     private void Awake()
     {
@@ -25,6 +28,8 @@ public class controlarPersonagem : MonoBehaviour
             movimentoPressionado = movimentoAtual.x != 0 || movimentoAtual.y != 0;
         };
         entrada.Personagem.Correr.performed += ctx => correrPressionado = ctx.ReadValueAsButton();
+        entrada.Personagem.Atacar.performed += ctx => ataquePressionado = ctx.ReadValueAsButton();
+
 
 
     }
@@ -36,6 +41,8 @@ public class controlarPersonagem : MonoBehaviour
 
         estaAndandoHash = Animator.StringToHash("estaAndando");
         estaCorrendoHash = Animator.StringToHash("estaCorrendo");
+        estaAtacandoHash = Animator.StringToHash("estaAtacando");
+        estaVivoHash = Animator.StringToHash("estaVivo");
     }
 
     // Update is called once per frame
@@ -43,6 +50,7 @@ public class controlarPersonagem : MonoBehaviour
     {
         movimentar();
         virar();
+        atacar();
 
     }
 
@@ -71,6 +79,23 @@ public class controlarPersonagem : MonoBehaviour
             {
             animator.SetBool(estaCorrendoHash, false);
         }
+    }
+
+    void atacar()
+    {
+        Debug.Log(ataquePressionado);
+        bool estaAtacando = animator.GetBool(estaAtacandoHash);
+
+        if (ataquePressionado && !estaAtacando)
+        {
+            animator.SetBool(estaAtacandoHash, true);
+        }
+
+        if (!ataquePressionado && estaAtacando)
+        {
+            animator.SetBool(estaAtacandoHash, false);
+        }
+
     }
 
     void virar()

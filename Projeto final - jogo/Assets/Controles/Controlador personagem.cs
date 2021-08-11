@@ -33,6 +33,14 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Atacar"",
+                    ""type"": ""Button"",
+                    ""id"": ""cdb9e8ca-7933-4e6f-9049-77f195b212bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -101,6 +109,17 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""action"": ""Correr"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b7a3b8d-df5d-41ad-a2fb-52bf322543a5"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Atacar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -111,6 +130,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         m_Personagem = asset.FindActionMap("Personagem", throwIfNotFound: true);
         m_Personagem_Mover = m_Personagem.FindAction("Mover", throwIfNotFound: true);
         m_Personagem_Correr = m_Personagem.FindAction("Correr", throwIfNotFound: true);
+        m_Personagem_Atacar = m_Personagem.FindAction("Atacar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,12 +182,14 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
     private IPersonagemActions m_PersonagemActionsCallbackInterface;
     private readonly InputAction m_Personagem_Mover;
     private readonly InputAction m_Personagem_Correr;
+    private readonly InputAction m_Personagem_Atacar;
     public struct PersonagemActions
     {
         private @Controladorpersonagem m_Wrapper;
         public PersonagemActions(@Controladorpersonagem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Mover => m_Wrapper.m_Personagem_Mover;
         public InputAction @Correr => m_Wrapper.m_Personagem_Correr;
+        public InputAction @Atacar => m_Wrapper.m_Personagem_Atacar;
         public InputActionMap Get() { return m_Wrapper.m_Personagem; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -183,6 +205,9 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                 @Correr.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnCorrer;
                 @Correr.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnCorrer;
                 @Correr.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnCorrer;
+                @Atacar.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnAtacar;
+                @Atacar.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnAtacar;
+                @Atacar.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnAtacar;
             }
             m_Wrapper.m_PersonagemActionsCallbackInterface = instance;
             if (instance != null)
@@ -193,6 +218,9 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                 @Correr.started += instance.OnCorrer;
                 @Correr.performed += instance.OnCorrer;
                 @Correr.canceled += instance.OnCorrer;
+                @Atacar.started += instance.OnAtacar;
+                @Atacar.performed += instance.OnAtacar;
+                @Atacar.canceled += instance.OnAtacar;
             }
         }
     }
@@ -201,5 +229,6 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
     {
         void OnMover(InputAction.CallbackContext context);
         void OnCorrer(InputAction.CallbackContext context);
+        void OnAtacar(InputAction.CallbackContext context);
     }
 }
