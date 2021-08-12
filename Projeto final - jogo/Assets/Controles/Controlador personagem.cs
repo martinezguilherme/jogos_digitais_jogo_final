@@ -41,6 +41,22 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Equipar espada"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7102368-1fde-4805-95fa-3efbc6ab4a0c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Equipar besta"",
+                    ""type"": ""Button"",
+                    ""id"": ""f807a080-0fa0-4c19-aaa2-5c7d9cbd6009"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -120,6 +136,28 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""action"": ""Atacar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3faacbfa-533f-44ab-8757-55971d082169"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equipar espada"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7597554d-9ca3-43ce-95c3-72be1d6dc601"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equipar besta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +169,8 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         m_Personagem_Mover = m_Personagem.FindAction("Mover", throwIfNotFound: true);
         m_Personagem_Correr = m_Personagem.FindAction("Correr", throwIfNotFound: true);
         m_Personagem_Atacar = m_Personagem.FindAction("Atacar", throwIfNotFound: true);
+        m_Personagem_Equiparespada = m_Personagem.FindAction("Equipar espada", throwIfNotFound: true);
+        m_Personagem_Equiparbesta = m_Personagem.FindAction("Equipar besta", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +223,8 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
     private readonly InputAction m_Personagem_Mover;
     private readonly InputAction m_Personagem_Correr;
     private readonly InputAction m_Personagem_Atacar;
+    private readonly InputAction m_Personagem_Equiparespada;
+    private readonly InputAction m_Personagem_Equiparbesta;
     public struct PersonagemActions
     {
         private @Controladorpersonagem m_Wrapper;
@@ -190,6 +232,8 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         public InputAction @Mover => m_Wrapper.m_Personagem_Mover;
         public InputAction @Correr => m_Wrapper.m_Personagem_Correr;
         public InputAction @Atacar => m_Wrapper.m_Personagem_Atacar;
+        public InputAction @Equiparespada => m_Wrapper.m_Personagem_Equiparespada;
+        public InputAction @Equiparbesta => m_Wrapper.m_Personagem_Equiparbesta;
         public InputActionMap Get() { return m_Wrapper.m_Personagem; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +252,12 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                 @Atacar.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnAtacar;
                 @Atacar.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnAtacar;
                 @Atacar.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnAtacar;
+                @Equiparespada.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnEquiparespada;
+                @Equiparespada.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnEquiparespada;
+                @Equiparespada.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnEquiparespada;
+                @Equiparbesta.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnEquiparbesta;
+                @Equiparbesta.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnEquiparbesta;
+                @Equiparbesta.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnEquiparbesta;
             }
             m_Wrapper.m_PersonagemActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +271,12 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                 @Atacar.started += instance.OnAtacar;
                 @Atacar.performed += instance.OnAtacar;
                 @Atacar.canceled += instance.OnAtacar;
+                @Equiparespada.started += instance.OnEquiparespada;
+                @Equiparespada.performed += instance.OnEquiparespada;
+                @Equiparespada.canceled += instance.OnEquiparespada;
+                @Equiparbesta.started += instance.OnEquiparbesta;
+                @Equiparbesta.performed += instance.OnEquiparbesta;
+                @Equiparbesta.canceled += instance.OnEquiparbesta;
             }
         }
     }
@@ -230,5 +286,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         void OnMover(InputAction.CallbackContext context);
         void OnCorrer(InputAction.CallbackContext context);
         void OnAtacar(InputAction.CallbackContext context);
+        void OnEquiparespada(InputAction.CallbackContext context);
+        void OnEquiparbesta(InputAction.CallbackContext context);
     }
 }
