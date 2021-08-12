@@ -11,6 +11,8 @@ public class controlarPersonagem : MonoBehaviour
     int estaCorrendoHash;
     int estaAtacandoHash;
     int estaVivoHash;
+    int espadaEquipadaHash;
+    int bestaEquipadaHash;
 
     Controladorpersonagem entrada;
 
@@ -18,6 +20,10 @@ public class controlarPersonagem : MonoBehaviour
     bool movimentoPressionado;
     bool correrPressionado;
     bool ataquePressionado;
+    bool equiparBestaPressionado;
+    bool equiparEspadaPressionado;
+
+    GameObject armaPersonagem;
 
     private void Awake()
     {
@@ -29,8 +35,8 @@ public class controlarPersonagem : MonoBehaviour
         };
         entrada.Personagem.Correr.performed += ctx => correrPressionado = ctx.ReadValueAsButton();
         entrada.Personagem.Atacar.performed += ctx => ataquePressionado = ctx.ReadValueAsButton();
-
-
+        entrada.Personagem.Equiparbesta.performed += ctx => equiparBestaPressionado = ctx.ReadValueAsButton();
+        entrada.Personagem.Equiparespada.performed += ctx => equiparEspadaPressionado = ctx.ReadValueAsButton();
 
     }
 
@@ -43,6 +49,7 @@ public class controlarPersonagem : MonoBehaviour
         estaCorrendoHash = Animator.StringToHash("estaCorrendo");
         estaAtacandoHash = Animator.StringToHash("estaAtacando");
         estaVivoHash = Animator.StringToHash("estaVivo");
+        espadaEquipadaHash = Animator.StringToHash("espadaEquipada");
     }
 
     // Update is called once per frame
@@ -51,6 +58,7 @@ public class controlarPersonagem : MonoBehaviour
         movimentar();
         virar();
         atacar();
+        trocarEquipamento();
 
     }
 
@@ -81,9 +89,21 @@ public class controlarPersonagem : MonoBehaviour
         }
     }
 
+    void trocarEquipamento()
+    {
+        bool espadaEquipada = animator.GetBool(espadaEquipadaHash);
+
+        if (equiparEspadaPressionado)
+        {
+            armaPersonagem = GameObject.Find("/Anna Harris/mixamorig:RightHand/Modelo espada");
+            bool estadoAtual = armaPersonagem.activeSelf;
+            armaPersonagem.SetActive(!estadoAtual);
+            animator.SetBool(espadaEquipadaHash, !estadoAtual);
+        }
+    }
+
     void atacar()
     {
-        Debug.Log(ataquePressionado);
         bool estaAtacando = animator.GetBool(estaAtacandoHash);
 
         if (ataquePressionado && !estaAtacando)
