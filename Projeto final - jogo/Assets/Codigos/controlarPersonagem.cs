@@ -23,7 +23,9 @@ public class controlarPersonagem : MonoBehaviour
     bool equiparBestaPressionado;
     bool equiparEspadaPressionado;
 
-    GameObject armaPersonagem;
+    string caminhoEspada = "/Anna Harris/mixamorig:RightHand/Modelo espada";
+    string caminhoBesta = "/Anna Harris/mixamorig:RightHand/Modelo besta";
+
 
     private void Awake()
     {
@@ -50,6 +52,8 @@ public class controlarPersonagem : MonoBehaviour
         estaAtacandoHash = Animator.StringToHash("estaAtacando");
         estaVivoHash = Animator.StringToHash("estaVivo");
         espadaEquipadaHash = Animator.StringToHash("espadaEquipada");
+        bestaEquipadaHash = Animator.StringToHash("bestaEquipada");
+
     }
 
     // Update is called once per frame
@@ -92,14 +96,47 @@ public class controlarPersonagem : MonoBehaviour
     void trocarEquipamento()
     {
         bool espadaEquipada = animator.GetBool(espadaEquipadaHash);
+        bool bestaEquipada = animator.GetBool(bestaEquipadaHash);
+
 
         if (equiparEspadaPressionado)
         {
-            armaPersonagem = GameObject.Find("/Anna Harris/mixamorig:RightHand/Modelo espada");
-            bool estadoAtual = armaPersonagem.activeSelf;
-            armaPersonagem.SetActive(!estadoAtual);
+            GameObject armaPersonagemEspada;
+            GameObject armaPersonagemBesta;
+
+            armaPersonagemEspada = GameObject.Find(caminhoEspada);
+            armaPersonagemBesta = GameObject.Find(caminhoBesta);
+
+            // Desabilita a besta caso esteja ativada
+            armaPersonagemBesta.SetActive(false);
+            animator.SetBool(bestaEquipadaHash, false);
+
+
+            // Habilita a espada caso não esteja e desabilita caso esteja
+            bool estadoAtual = armaPersonagemEspada.activeSelf;
+            armaPersonagemEspada.SetActive(!estadoAtual);
             animator.SetBool(espadaEquipadaHash, !estadoAtual);
         }
+
+        if (equiparBestaPressionado)
+        {
+            GameObject armaPersonagemEspada;
+            GameObject armaPersonagemBesta;
+
+            armaPersonagemEspada = GameObject.Find(caminhoEspada);
+            armaPersonagemBesta = GameObject.Find(caminhoBesta);
+
+            // Desabilita a espada caso esteja ativada
+            armaPersonagemEspada.SetActive(false);
+            animator.SetBool(espadaEquipadaHash, false);
+
+
+            // Habilita a espada caso não esteja e desabilita caso esteja
+            bool estadoAtual = armaPersonagemBesta.activeSelf;
+            armaPersonagemBesta.SetActive(!estadoAtual);
+            animator.SetBool(bestaEquipadaHash, !estadoAtual);
+        }
+
     }
 
     void atacar()
