@@ -64,7 +64,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""name"": ""WASD"",
                     ""id"": ""a6475064-109e-4b53-b72a-75482861356f"",
                     ""path"": ""2DVector"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Mover"",

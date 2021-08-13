@@ -170,7 +170,10 @@ public class controlarPersonagem : MonoBehaviour
     {
         Vector3 posicaoAtual = transform.position;
 
-        Vector3 novaPosicao = new Vector3(movimentoAtual.x, 0, movimentoAtual.y);
+        Vector3 novaPosicao = new Vector3(movimentoAtual.x * 0.5f, 0, movimentoAtual.y * 0.5f);
+
+        Debug.Log(movimentoAtual.x);
+        Debug.Log(movimentoAtual.y);
 
         Vector3 posicaoOlharPara = posicaoAtual + novaPosicao;
 
