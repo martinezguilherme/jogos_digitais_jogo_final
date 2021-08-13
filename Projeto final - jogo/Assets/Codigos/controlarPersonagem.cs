@@ -142,10 +142,21 @@ public class controlarPersonagem : MonoBehaviour
     void atacar()
     {
         bool estaAtacando = animator.GetBool(estaAtacandoHash);
+        bool bestaEquipada = animator.GetBool(bestaEquipadaHash);
 
         if (ataquePressionado && !estaAtacando)
         {
             animator.SetBool(estaAtacandoHash, true);
+
+            if (bestaEquipada)
+            {
+                GameObject personagem;
+
+                personagem = GameObject.Find("/Anna Harris");
+
+                personagem.GetComponent<atirarFlecha>().atirar();
+            }
+
         }
 
         if (!ataquePressionado && estaAtacando)
