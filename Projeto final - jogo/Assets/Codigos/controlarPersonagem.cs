@@ -72,6 +72,11 @@ public class controlarPersonagem : MonoBehaviour
         bool estaCorrendo = animator.GetBool(estaCorrendoHash);
         bool movCorrida = movimentoPressionado && correrPressionado;
 
+        if (!movimentoPressionado)
+        {
+            animator.SetBool(estaAndandoHash, false);
+        }
+
         if (movimentoPressionado && !estaAndando)
         {
             animator.SetBool(estaAndandoHash, true);
@@ -88,9 +93,10 @@ public class controlarPersonagem : MonoBehaviour
         }
 
         if (!movCorrida && estaCorrendo)
-            {
+        {
             animator.SetBool(estaCorrendoHash, false);
         }
+
     }
 
     void trocarEquipamento()
@@ -170,10 +176,7 @@ public class controlarPersonagem : MonoBehaviour
     {
         Vector3 posicaoAtual = transform.position;
 
-        Vector3 novaPosicao = new Vector3(movimentoAtual.x * 0.5f, 0, movimentoAtual.y * 0.5f);
-
-        Debug.Log(movimentoAtual.x);
-        Debug.Log(movimentoAtual.y);
+        Vector3 novaPosicao = new Vector3(movimentoAtual.x, 0, movimentoAtual.y);
 
         Vector3 posicaoOlharPara = posicaoAtual + novaPosicao;
 

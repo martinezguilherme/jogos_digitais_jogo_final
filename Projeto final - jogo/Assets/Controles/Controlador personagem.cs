@@ -20,7 +20,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Mover"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""6cb1c3f3-489e-46c4-b7df-7771a191e6ec"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -32,7 +32,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""id"": ""b884987d-a080-4c0a-8e75-58acb398a968"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Atacar"",
