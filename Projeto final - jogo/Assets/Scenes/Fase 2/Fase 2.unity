@@ -1844,6 +1844,24 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - nome: esticandoArco
+    clip: {fileID: 8300000, guid: ee1d13121551ff44ca1ee1a405612c8e, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - nome: dano
+    clip: {fileID: 8300000, guid: 5d9a3f92117323f4b8e6134d00c8bae3, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &1675338702
 Transform:
   m_ObjectHideFlags: 0
