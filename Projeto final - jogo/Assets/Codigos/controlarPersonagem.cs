@@ -84,29 +84,50 @@ public class controlarPersonagem : MonoBehaviour
         bool estaCorrendo = animator.GetBool(estaCorrendoHash);
         bool movCorrida = movimentoPressionado && correrPressionado;
 
+        if (!estaAndando && !estaCorrendo)
+        {
+            FindObjectOfType<gerenciarAudio>().pararReproducao("AndarTerra");
+            FindObjectOfType<gerenciarAudio>().pararReproducao("CorrerTerra");
+
+
+        }
+
         if (!movimentoPressionado)
         {
             animator.SetBool(estaAndandoHash, false);
         }
 
+
         if (movimentoPressionado && !estaAndando)
         {
             animator.SetBool(estaAndandoHash, true);
+            FindObjectOfType<gerenciarAudio>().Reproduzir("AndarTerra");
+
         }
 
         if (!movimentoPressionado && estaAndando)
         {
             animator.SetBool(estaAndandoHash, false);
+            FindObjectOfType<gerenciarAudio>().pararReproducao("AndarTerra");
+
         }
 
         if (movCorrida && !estaCorrendo)
         {
             animator.SetBool(estaCorrendoHash, true);
+            FindObjectOfType<gerenciarAudio>().pararReproducao("AndarTerra");
+            FindObjectOfType<gerenciarAudio>().Reproduzir("CorrerTerra");
+
+
         }
 
         if (!movCorrida && estaCorrendo)
         {
             animator.SetBool(estaCorrendoHash, false);
+            FindObjectOfType<gerenciarAudio>().pararReproducao("CorrerTerra");
+            FindObjectOfType<gerenciarAudio>().Reproduzir("AndarTerra");
+
+
         }
 
     }
@@ -227,6 +248,8 @@ public class controlarPersonagem : MonoBehaviour
     {
         Debug.Log("Personagem " + transform.name + " morreu");
         animator.SetBool(estaVivoHash, false);
+        FindObjectOfType<gerenciarAudio>().Reproduzir("SomDeMorteFeminino");
+
     }
 
     void OnEnable()
