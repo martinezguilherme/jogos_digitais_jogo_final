@@ -26,6 +26,16 @@ public class controlarPersonagem : MonoBehaviour
     string caminhoEspada = "/Anna Harris/mixamorig:RightHand/Modelo espada";
     string caminhoBesta = "/Anna Harris/mixamorig:RightHand/Modelo besta";
 
+    public Transform pontoDeAtaque;
+    public float alcanceDeAtaque = 0.5f;
+    public int danoBase = 20;
+    public LayerMask camadaInimigos;
+
+    public int vidaMaxima = 100;
+    int vidaAtual;
+
+
+
 
     private void Awake()
     {
@@ -53,6 +63,8 @@ public class controlarPersonagem : MonoBehaviour
         estaVivoHash = Animator.StringToHash("estaVivo");
         espadaEquipadaHash = Animator.StringToHash("espadaEquipada");
         bestaEquipadaHash = Animator.StringToHash("bestaEquipada");
+
+        vidaAtual = vidaMaxima;
 
     }
 
@@ -149,10 +161,23 @@ public class controlarPersonagem : MonoBehaviour
     {
         bool estaAtacando = animator.GetBool(estaAtacandoHash);
         bool bestaEquipada = animator.GetBool(bestaEquipadaHash);
+        bool espadaEquipada = animator.GetBool(espadaEquipadaHash);
+
 
         if (ataquePressionado && !estaAtacando)
         {
             animator.SetBool(estaAtacandoHash, true);
+
+            if (espadaEquipada)
+            {
+                Collider[] inimigosAcertados = Physics.OverlapSphere(pontoDeAtaque.position, alcanceDeAtaque, camadaInimigos);
+
+                foreach(Collider inimigo in inimigosAcertados)
+                {
+                    Debug.Log("Acertamos" + inimigo.name);
+                    inimigo.GetComponent<inimigo>().receberDano(danoBase);
+                }
+            }
 
             if (bestaEquipada)
             {
@@ -172,6 +197,11 @@ public class controlarPersonagem : MonoBehaviour
 
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(pontoDeAtaque.position, alcanceDeAtaque);
+    }
+
     void virar()
     {
         Vector3 posicaoAtual = transform.position;
@@ -181,6 +211,22 @@ public class controlarPersonagem : MonoBehaviour
         Vector3 posicaoOlharPara = posicaoAtual + novaPosicao;
 
         transform.LookAt(posicaoOlharPara);
+    }
+
+    public void receberDano(int dano)
+    {
+        vidaAtual -= dano;
+
+        if (vidaAtual <= 0)
+        {
+            morrer();
+        }
+    }
+
+    void morrer()
+    {
+        Debug.Log("Personagem " + transform.name + " morreu");
+        animator.SetBool(estaVivoHash, false);
     }
 
     void OnEnable()
