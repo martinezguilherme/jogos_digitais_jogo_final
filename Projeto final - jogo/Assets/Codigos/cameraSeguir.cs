@@ -6,13 +6,14 @@ public class cameraSeguir : MonoBehaviour
 {
     public Transform alvoCamera;
 
-    public float suavisarVelocidade = 0.125f;
+    public float suavisarVelocidade;
     public Vector3 deslocamento;
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
+
         Vector3 posicaoDesejada = alvoCamera.position + deslocamento;
-        Vector3 posicaoSuavisa = Vector3.Lerp(transform.position, posicaoDesejada, suavisarVelocidade);
+        Vector3 posicaoSuavisa = Vector3.Lerp(transform.position, posicaoDesejada, suavisarVelocidade * Time.deltaTime);
 
         transform.position = posicaoSuavisa;
 

@@ -349,8 +349,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alvoCamera: {fileID: 2114577324}
-  suavisarVelocidade: 0.125
-  deslocamento: {x: 0, y: 0, z: 0}
+  suavisarVelocidade: 0
+  deslocamento: {x: 2, y: 4, z: -4}
 --- !u!81 &267553768
 AudioListener:
   m_ObjectHideFlags: 0
@@ -393,7 +393,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -1655,7 +1655,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
