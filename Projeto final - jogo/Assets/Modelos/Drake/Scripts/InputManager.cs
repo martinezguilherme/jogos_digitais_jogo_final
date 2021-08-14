@@ -18,6 +18,14 @@ public class InputManager : MonoBehaviour
     public bool defending = false;
     public bool rolando = false;
 
+    // NPC detection vars
+    private bool interagindo = false;
+    private bool raioInteracao = false;
+    private GameObject triggeringNPC = null;
+
+    // NPC text objectcs
+    public GameObject interactionTooltip;
+    public GameObject npcText;
 
     private void Awake()
     {
@@ -52,6 +60,9 @@ public class InputManager : MonoBehaviour
 
             drakeControls.PlayerActions.DODGE.performed += i => rolando = true;
 
+            drakeControls.PlayerActions.INTERACT.performed += i => interagindo = true;
+            drakeControls.PlayerActions.INTERACT.canceled += i => interagindo = false;
+
 
         }
         drakeControls.Enable();
@@ -64,20 +75,22 @@ public class InputManager : MonoBehaviour
         drakeControls.Disable();
     }
 
-    private void HandleMovementInput()
-    {
-        verticalInput = movementInput.y;
-        horizontalInput = movementInput.x;
-        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.correndo);
-    }
-
     public void HandleAllInputs()
     {
         HandleSprintingInput();
         HandleMovementInput();
         HandleShieldInput();
         HandleDodgeInput();
+        HandleInteractionInput();
+
+    }
+
+    private void HandleMovementInput()
+    {
+        verticalInput = movementInput.y;
+        horizontalInput = movementInput.x;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.correndo);
     }
 
     private void HandleSprintingInput()
@@ -110,4 +123,39 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "NPC")
+        {
+            raioInteracao = true;
+            triggeringNPC = other.gameObject;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "NPC")
+        {
+            raioInteracao = false;
+            triggeringNPC = null;
+        }
+    }
+
+    private void HandleInteractionInput()
+    {
+        if (raioInteracao)
+        {
+            interactionTooltip.SetActive(true);
+
+            if (interagindo)
+            {
+                npcText.SetActive(true);
+            } else
+            {
+                npcText.SetActive(false);
+            }
+        } else {
+            interactionTooltip.SetActive(false);
+        }
+    }
 }

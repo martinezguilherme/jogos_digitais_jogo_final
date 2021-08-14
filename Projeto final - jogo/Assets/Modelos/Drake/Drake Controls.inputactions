@@ -154,6 +154,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "INTERACT",
+                    "type": "Button",
+                    "id": "62b98f26-2036-4742-b135-0e514d0c43ae",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -187,6 +195,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DODGE",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49728979-9a00-4827-a316-1e97c7a4eed8",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "INTERACT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

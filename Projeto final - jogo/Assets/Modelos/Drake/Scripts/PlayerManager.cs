@@ -31,5 +31,4 @@ public class PlayerManager : MonoBehaviour
         isInteracting = animator.GetBool("isInteracting");
         isUsingRootMotion = animator.GetBool("isUsingRootMotion");
     }
-
 }

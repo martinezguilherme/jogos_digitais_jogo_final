@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Drake Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Modelos/Drake/Drake Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -167,6 +167,14 @@ public class @DrakeControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""INTERACT"",
+                    ""type"": ""Button"",
+                    ""id"": ""62b98f26-2036-4742-b135-0e514d0c43ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -202,6 +210,17 @@ public class @DrakeControls : IInputActionCollection, IDisposable
                     ""action"": ""DODGE"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49728979-9a00-4827-a316-1e97c7a4eed8"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""INTERACT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -216,6 +235,7 @@ public class @DrakeControls : IInputActionCollection, IDisposable
         m_PlayerActions_SHIFT = m_PlayerActions.FindAction("SHIFT", throwIfNotFound: true);
         m_PlayerActions_SHIELD = m_PlayerActions.FindAction("SHIELD", throwIfNotFound: true);
         m_PlayerActions_DODGE = m_PlayerActions.FindAction("DODGE", throwIfNotFound: true);
+        m_PlayerActions_INTERACT = m_PlayerActions.FindAction("INTERACT", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -301,6 +321,7 @@ public class @DrakeControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_SHIFT;
     private readonly InputAction m_PlayerActions_SHIELD;
     private readonly InputAction m_PlayerActions_DODGE;
+    private readonly InputAction m_PlayerActions_INTERACT;
     public struct PlayerActionsActions
     {
         private @DrakeControls m_Wrapper;
@@ -308,6 +329,7 @@ public class @DrakeControls : IInputActionCollection, IDisposable
         public InputAction @SHIFT => m_Wrapper.m_PlayerActions_SHIFT;
         public InputAction @SHIELD => m_Wrapper.m_PlayerActions_SHIELD;
         public InputAction @DODGE => m_Wrapper.m_PlayerActions_DODGE;
+        public InputAction @INTERACT => m_Wrapper.m_PlayerActions_INTERACT;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,6 +348,9 @@ public class @DrakeControls : IInputActionCollection, IDisposable
                 @DODGE.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnDODGE;
                 @DODGE.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnDODGE;
                 @DODGE.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnDODGE;
+                @INTERACT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnINTERACT;
+                @INTERACT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnINTERACT;
+                @INTERACT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnINTERACT;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -339,6 +364,9 @@ public class @DrakeControls : IInputActionCollection, IDisposable
                 @DODGE.started += instance.OnDODGE;
                 @DODGE.performed += instance.OnDODGE;
                 @DODGE.canceled += instance.OnDODGE;
+                @INTERACT.started += instance.OnINTERACT;
+                @INTERACT.performed += instance.OnINTERACT;
+                @INTERACT.canceled += instance.OnINTERACT;
             }
         }
     }
@@ -352,5 +380,6 @@ public class @DrakeControls : IInputActionCollection, IDisposable
         void OnSHIFT(InputAction.CallbackContext context);
         void OnSHIELD(InputAction.CallbackContext context);
         void OnDODGE(InputAction.CallbackContext context);
+        void OnINTERACT(InputAction.CallbackContext context);
     }
 }
