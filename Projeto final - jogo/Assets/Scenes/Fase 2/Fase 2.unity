@@ -1735,7 +1735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665598258}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -15.7, y: 29.4, z: 27.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1783,7 +1783,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - nome: AndarTerra
     clip: {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
-    volume: 1
+    volume: 0.355
     volumeVariance: 0.43
     pitch: 0.55
     pitchVariance: 0
@@ -1792,7 +1792,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - nome: CorrerTerra
     clip: {fileID: 8300000, guid: 9e68ea1ebd76aa44c8cfa5beb9850830, type: 3}
-    volume: 1
+    volume: 0.355
     volumeVariance: 0.43
     pitch: 1
     pitchVariance: 0
@@ -1860,6 +1860,15 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0
     loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - nome: somAmbiente
+    clip: {fileID: 8300000, guid: 37cd1b4bbf7c65b44aa48ef6838aba94, type: 3}
+    volume: 0.349
+    volumeVariance: 0.054
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
 --- !u!4 &1675338702
