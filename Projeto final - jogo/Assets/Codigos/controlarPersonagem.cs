@@ -193,20 +193,21 @@ public class controlarPersonagem : MonoBehaviour
             {
                 Collider[] inimigosAcertados = Physics.OverlapSphere(pontoDeAtaque.position, alcanceDeAtaque, camadaInimigos);
 
+                FindObjectOfType<gerenciarAudio>().Reproduzir("somEspadaVento");
+
                 foreach(Collider inimigo in inimigosAcertados)
                 {
                     Debug.Log("Acertamos" + inimigo.name);
                     inimigo.GetComponent<inimigo>().receberDano(danoBase);
+                    FindObjectOfType<gerenciarAudio>().Reproduzir("somEspada");
                 }
             }
 
             if (bestaEquipada)
             {
-                GameObject personagem;
 
-                personagem = GameObject.Find("/Anna Harris");
-
-                personagem.GetComponent<atirarFlecha>().atirar();
+                FindObjectOfType<gerenciarAudio>().Reproduzir("esticandoArco");
+                StartCoroutine(gameObject.GetComponent<atirarFlecha>().atirar());
             }
 
         }
@@ -214,6 +215,8 @@ public class controlarPersonagem : MonoBehaviour
         if (!ataquePressionado && estaAtacando)
         {
             animator.SetBool(estaAtacandoHash, false);
+            FindObjectOfType<gerenciarAudio>().pararReproducao("somEspadaVento");
+
         }
 
     }
@@ -237,6 +240,7 @@ public class controlarPersonagem : MonoBehaviour
     public void receberDano(int dano)
     {
         vidaAtual -= dano;
+        FindObjectOfType<gerenciarAudio>().Reproduzir("dano");
 
         if (vidaAtual <= 0)
         {

@@ -1799,6 +1799,51 @@ MonoBehaviour:
     loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - nome: temaFloresta1
+    clip: {fileID: 8300000, guid: 0ebb992e4ba08a94abc9bc5899959781, type: 3}
+    volume: 0.076
+    volumeVariance: 0
+    pitch: 0.5
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - nome: somEspada
+    clip: {fileID: 8300000, guid: e32e3bde5559afb4cad3ef963cc96446, type: 3}
+    volume: 0.293
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - nome: somEspadaVento
+    clip: {fileID: 8300000, guid: caa7c7c9cc63cc74ca16fbc4c28cc5a1, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 0.5
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - nome: arcoEFlecha
+    clip: {fileID: 8300000, guid: 520e2591276f4d743b07916f29b4a2fe, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - nome: flechaImpacto
+    clip: {fileID: 8300000, guid: 0703a9b480589c247bc6674a310ca1c4, type: 3}
+    volume: 0.6
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &1675338702
 Transform:
   m_ObjectHideFlags: 0
@@ -2563,7 +2608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Emissor: {fileID: 513043357}
   Flecha: {fileID: 8298797528065601110, guid: 19e9b9ed0fba1b54f8446389c7874dba, type: 3}
-  forcaFlecha: 100
+  forcaFlecha: 250
+  tempoEntreDisparos: 1.5
 --- !u!114 &2114577322
 MonoBehaviour:
   m_ObjectHideFlags: 0

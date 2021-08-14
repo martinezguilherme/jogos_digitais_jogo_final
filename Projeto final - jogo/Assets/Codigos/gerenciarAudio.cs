@@ -32,7 +32,12 @@ public class gerenciarAudio : MonoBehaviour
 		}
 	}
 
-	public void Reproduzir(string sound)
+    private void Start()
+    {
+		Reproduzir("temaFloresta1");
+    }
+
+    public void Reproduzir(string sound)
 	{
 		Sons s = Array.Find(sons, item => item.nome == sound);
 		if (s == null)
