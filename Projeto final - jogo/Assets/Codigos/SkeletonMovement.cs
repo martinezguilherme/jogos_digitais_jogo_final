@@ -6,6 +6,10 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 public class SkeletonMovement : MonoBehaviour
 {
+
+    float tempo;
+
+    public float tempoEntreAtaques = 1;
     private NavMeshAgent navComponent;
     private int distanciaAtrairMonstro = 10;
     public bool vivo = true;
@@ -19,6 +23,7 @@ public class SkeletonMovement : MonoBehaviour
 
        void Start()
     {
+        tempo = Time.time;
         anim = GetComponent<Animator>();
         navComponent = this.gameObject.GetComponent<NavMeshAgent>();
     }
@@ -49,6 +54,11 @@ public class SkeletonMovement : MonoBehaviour
                     anim.SetBool("andando", false);
                     anim.SetBool("atacando", true);
                     navComponent.speed = 0;
+                    if (Time.time - tempo >= tempoEntreAtaques){
+                        GetComponent<inimigo>().atacar();
+                        tempo = Time.time;
+
+                    }
                 }
             }else{
                 navComponent.speed = 0;

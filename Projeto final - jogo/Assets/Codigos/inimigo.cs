@@ -26,7 +26,7 @@ public class inimigo : MonoBehaviour
         vidaAtual = vidaMaxima;
     }
 
-    void atacar()
+    public void atacar()
     {
         Collider[] personagemAcertados = Physics.OverlapSphere(transform.position, alcanceAtaque, camadaAlvos);
 
