@@ -53,7 +53,9 @@ public class inimigo : MonoBehaviour
 
     void morrer()
     {
-        somMorte.Play();
+        if (somMorte){
+            somMorte.Play();
+        }
         Debug.Log("Inimigo " + transform.name + " morreu");
         skeletonMovement.vivo = false;
     }
