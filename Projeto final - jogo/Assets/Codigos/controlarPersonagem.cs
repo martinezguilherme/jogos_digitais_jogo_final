@@ -39,9 +39,12 @@ public class controlarPersonagem : MonoBehaviour
     public LayerMask camadaInimigos;
 
     public int vidaMaxima = 100;
-    int vidaAtual;
+    public int vidaAtual;
 
     bool usarRotacaoCamera = true;
+
+    float tempoEntreAtaquesBesta = 3;
+    float tempoAtual;
 
 
 
@@ -68,7 +71,7 @@ public class controlarPersonagem : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
+        tempoAtual = Time.time;
         estaAndandoHash = Animator.StringToHash("estaAndando");
         estaCorrendoHash = Animator.StringToHash("estaCorrendo");
         estaAtacandoHash = Animator.StringToHash("estaAtacando");
@@ -83,10 +86,14 @@ public class controlarPersonagem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movimentar();
-        virar();
-        atacar();
-        trocarEquipamento();
+        if (animator.GetBool(estaVivoHash)){
+            movimentar();
+            virar();
+            atacar();
+            trocarEquipamento();
+
+        }
+        
         HandleCameraInput();
 
     }
@@ -216,9 +223,9 @@ public class controlarPersonagem : MonoBehaviour
                 }
             }
 
-            if (bestaEquipada)
+            if (bestaEquipada && Time.time - tempoAtual >= tempoEntreAtaquesBesta)
             {
-
+                tempoAtual = Time.time;
                 FindObjectOfType<gerenciarAudio>().Reproduzir("esticandoArco");
                 StartCoroutine(gameObject.GetComponent<atirarFlecha>().atirar());
             }
@@ -269,7 +276,7 @@ public class controlarPersonagem : MonoBehaviour
         vidaAtual -= dano;
         FindObjectOfType<gerenciarAudio>().Reproduzir("dano");
 
-        if (vidaAtual <= 0)
+        if (vidaAtual <= 0 && animator.GetBool(estaVivoHash))
         {
             morrer();
         }
@@ -279,12 +286,18 @@ public class controlarPersonagem : MonoBehaviour
     {
         Debug.Log("Personagem " + transform.name + " morreu");
         animator.SetBool(estaVivoHash, false);
+        animator.SetBool(estaVivoHash, false);
+
+        animator.SetBool(estaAndandoHash, false);
+        animator.SetBool(estaCorrendoHash, false);
+        animator.SetBool(estaAtacandoHash, false);
         FindObjectOfType<gerenciarAudio>().Reproduzir("SomDeMorteFeminino");
         Invoke("reiniciar", 3);
     }
          
 
     
+        
 
     void reiniciar(){
          SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex ) ;
