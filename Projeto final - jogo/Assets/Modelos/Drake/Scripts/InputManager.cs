@@ -28,9 +28,11 @@ public class InputManager : MonoBehaviour
     private bool interagindo = false;
     private bool raioInteracao = false;
     private GameObject triggeringNPC = null;
+    bool interagiu = false;
 
     // NPC text objectcs
     public GameObject interactionTooltip;
+    public GameObject npcGreetings;
     public GameObject npcText;
 
     private void Awake()
@@ -160,16 +162,18 @@ public class InputManager : MonoBehaviour
         if (raioInteracao)
         {
             interactionTooltip.SetActive(true);
-
-            if (interagindo)
+            
+            if (interagindo || interagiu)
             {
+                npcGreetings.SetActive(false);
+                interactionTooltip.SetActive(false);
                 npcText.SetActive(true);
-            } else
-            {
-                npcText.SetActive(false);
-            }
+                interagiu = true;
+            } 
         } else {
             interactionTooltip.SetActive(false);
+            npcText.SetActive(false);
+            interagiu = false;
         }
     }
 }
