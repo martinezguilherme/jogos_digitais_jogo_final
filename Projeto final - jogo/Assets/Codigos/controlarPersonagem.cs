@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class controlarPersonagem : MonoBehaviour
 {
@@ -279,7 +280,14 @@ public class controlarPersonagem : MonoBehaviour
         Debug.Log("Personagem " + transform.name + " morreu");
         animator.SetBool(estaVivoHash, false);
         FindObjectOfType<gerenciarAudio>().Reproduzir("SomDeMorteFeminino");
+        Invoke("reiniciar", 3);
+    }
+         
 
+    
+
+    void reiniciar(){
+         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex ) ;
     }
 
     void OnEnable()

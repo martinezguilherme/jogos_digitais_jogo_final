@@ -17,6 +17,7 @@ public class matar : MonoBehaviour
         {
             Debug.Log("Acertamos com escudo: " + inimigo.name);
             inimigo.GetComponent<inimigo>().receberDano(danoBaseEscudo);
+            FindObjectOfType<gerenciarAudio>().Reproduzir("escudoBatendo");
         }
     }
 

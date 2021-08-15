@@ -7,8 +7,6 @@ public class inimigo : MonoBehaviour
 
     SkeletonMovement skeletonMovement;
     public LayerMask camadaAlvos;
-    public GameObject inimigoObject;
-    public AudioSource somMorte;
 
     public int vidaMaxima = 100;
     int vidaAtual;
@@ -33,7 +31,12 @@ public class inimigo : MonoBehaviour
         foreach (Collider personagem in personagemAcertados)
         {
             Debug.Log("Acertamos" + personagem.name);
-            personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
+            if(personagem.GetComponent<controlarPersonagem>() != null){
+                personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
+            }else if(personagem.GetComponent<PlayerManager>() != null)
+            {
+                personagem.GetComponent<PlayerManager>().receberDano(danoBase);
+            }
         }
     }
 
@@ -49,9 +52,9 @@ public class inimigo : MonoBehaviour
 
     void morrer()
     {
-        somMorte.Play();
         Debug.Log("Inimigo " + transform.name + " morreu");
         skeletonMovement.vivo = false;
+        FindObjectOfType<gerenciarAudio>().Reproduzir("skeletonMorte");
     }
 
     // Update is called once per frame
