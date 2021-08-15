@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
  
  public float lookAngle;
  public float pivotAngle;
- private float minimumPivotAngle = -15;
+ private float minimumPivotAngle = 6;
  private float maximumPivotAngle = 16;
 
 
