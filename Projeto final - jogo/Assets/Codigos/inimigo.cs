@@ -31,8 +31,12 @@ public class inimigo : MonoBehaviour
 
         foreach (Collider personagem in personagemAcertados)
         {
-            Debug.Log("Acertamos" + personagem.name);
-            personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
+            if(personagem.GetComponent<controlarPersonagem>().vidaAtual > 0){
+                Debug.Log("Acertado" + personagem.name);
+                personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
+
+            }
+
         }
     }
 
