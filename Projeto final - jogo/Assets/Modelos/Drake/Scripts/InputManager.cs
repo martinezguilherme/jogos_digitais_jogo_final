@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     DrakeControls drakeControls;
     AnimatorManager animatorManager;
     PlayerLocomotion playerLocomotion;
+ 
     public Vector2 movementInput;
 
     public Vector2 cameraInput;
@@ -34,6 +35,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+    
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
     }
@@ -130,7 +132,9 @@ public class InputManager : MonoBehaviour
         {
             defending = false;
             playerLocomotion.HandleShield();
+            
         }
+        
     }
 
     void OnTriggerEnter(Collider other)

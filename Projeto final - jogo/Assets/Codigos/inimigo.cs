@@ -5,7 +5,9 @@ using UnityEngine;
 public class inimigo : MonoBehaviour
 {
 
+    SkeletonMovement skeletonMovement;
     public LayerMask camadaAlvos;
+    public GameObject inimigoObject;
 
     public int vidaMaxima = 100;
     int vidaAtual;
@@ -17,6 +19,9 @@ public class inimigo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        skeletonMovement = GetComponent<SkeletonMovement>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         vidaAtual = vidaMaxima;
     }
 
@@ -44,7 +49,7 @@ public class inimigo : MonoBehaviour
     void morrer()
     {
         Debug.Log("Inimigo " + transform.name + " morreu");
-        // Chamar aqui a animação de morte do personagem
+        skeletonMovement.vivo = false;
     }
 
     // Update is called once per frame
