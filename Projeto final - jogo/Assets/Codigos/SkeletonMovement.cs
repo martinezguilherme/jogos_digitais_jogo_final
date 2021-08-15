@@ -41,6 +41,7 @@ public class SkeletonMovement : MonoBehaviour
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 5.0f * Time.deltaTime);
 
                 anim.SetBool("parado", false);
+                Debug.Log(direction.magnitude);
                 if (direction.magnitude > distanciaParaAtacar && direction.magnitude < distanciaAtrairMonstro)
                 {
                     navComponent.SetDestination(jogador.position);

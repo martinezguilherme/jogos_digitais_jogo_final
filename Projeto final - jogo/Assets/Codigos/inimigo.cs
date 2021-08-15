@@ -13,7 +13,7 @@ public class inimigo : MonoBehaviour
 
     public float alcanceAtaque = 20;
 
-    int danoBase = 20;
+    public int danoBase = 20;
 
     // Start is called before the first frame update
     void Start()
