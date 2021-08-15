@@ -7,7 +7,13 @@ public class InputManager : MonoBehaviour
     DrakeControls drakeControls;
     AnimatorManager animatorManager;
     PlayerLocomotion playerLocomotion;
+ 
     public Vector2 movementInput;
+
+    public Vector2 cameraInput;
+    public float cameraInputX;
+    public float cameraInputY;
+
     public float moveAmount;
     public float verticalInput;
     public float horizontalInput;
@@ -29,6 +35,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+    
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
     }
@@ -52,6 +59,8 @@ public class InputManager : MonoBehaviour
             drakeControls = new DrakeControls();
 
             drakeControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            drakeControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+            
 
             drakeControls.PlayerActions.SHIFT.performed += i => correndo = true;
             drakeControls.PlayerActions.SHIFT.canceled += i => correndo = false;
@@ -91,6 +100,9 @@ public class InputManager : MonoBehaviour
         horizontalInput = movementInput.x;
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.correndo);
+        
+        cameraInputX = cameraInput.x;
+        cameraInputY = cameraInput.y;
     }
 
     private void HandleSprintingInput()
@@ -120,7 +132,9 @@ public class InputManager : MonoBehaviour
         {
             defending = false;
             playerLocomotion.HandleShield();
+            
         }
+        
     }
 
     void OnTriggerEnter(Collider other)

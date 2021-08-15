@@ -14,8 +14,12 @@ public class atirarFlecha : MonoBehaviour
     //Enter the Speed of the Bullet from the Component Inspector.
     public float forcaFlecha;
 
-    public void atirar()
+    public float tempoEntreDisparos;
+
+    public IEnumerator atirar()
     {
+        yield return new WaitForSeconds(tempoEntreDisparos);
+        FindObjectOfType<gerenciarAudio>().Reproduzir("arcoEFlecha");
 
         GameObject instanciaTemporariaFlecha;
         instanciaTemporariaFlecha = Instantiate(Flecha, Emissor.transform.position, Emissor.transform.rotation) as GameObject;

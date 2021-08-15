@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class controlarPersonagem : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class controlarPersonagem : MonoBehaviour
 
     Controladorpersonagem entrada;
 
+    CameraManager cameraManager;
+    public Vector2 cameraInput;
+    public float cameraInputX;
+    public float cameraInputY;
+
     Vector2 movimentoAtual;
     bool movimentoPressionado;
     bool correrPressionado;
@@ -28,17 +34,24 @@ public class controlarPersonagem : MonoBehaviour
 
     public Transform pontoDeAtaque;
     public float alcanceDeAtaque = 0.5f;
+    public float correcaoRotacao;
     public int danoBase = 20;
     public LayerMask camadaInimigos;
 
     public int vidaMaxima = 100;
-    int vidaAtual;
+    public int vidaAtual;
+
+    bool usarRotacaoCamera = true;
+
+    float tempoEntreAtaquesBesta = 3;
+    float tempoAtual;
 
 
 
 
     private void Awake()
     {
+        cameraManager = FindObjectOfType<CameraManager>();
         entrada = new Controladorpersonagem();
         entrada.Personagem.Mover.performed += ctx =>
         {
@@ -50,13 +63,15 @@ public class controlarPersonagem : MonoBehaviour
         entrada.Personagem.Equiparbesta.performed += ctx => equiparBestaPressionado = ctx.ReadValueAsButton();
         entrada.Personagem.Equiparespada.performed += ctx => equiparEspadaPressionado = ctx.ReadValueAsButton();
 
+        entrada.Personagem.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-
+        tempoAtual = Time.time;
         estaAndandoHash = Animator.StringToHash("estaAndando");
         estaCorrendoHash = Animator.StringToHash("estaCorrendo");
         estaAtacandoHash = Animator.StringToHash("estaAtacando");
@@ -71,10 +86,15 @@ public class controlarPersonagem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movimentar();
-        virar();
-        atacar();
-        trocarEquipamento();
+        if (animator.GetBool(estaVivoHash)){
+            movimentar();
+            virar();
+            atacar();
+            trocarEquipamento();
+
+        }
+        
+        HandleCameraInput();
 
     }
 
@@ -151,7 +171,7 @@ public class controlarPersonagem : MonoBehaviour
             animator.SetBool(bestaEquipadaHash, false);
 
 
-            // Habilita a espada caso n�o esteja e desabilita caso esteja
+            // Habilita a espada caso n�o esteja e desabilita caso esteja
             bool estadoAtual = armaPersonagemEspada.activeSelf;
             armaPersonagemEspada.SetActive(!estadoAtual);
             animator.SetBool(espadaEquipadaHash, !estadoAtual);
@@ -170,7 +190,7 @@ public class controlarPersonagem : MonoBehaviour
             animator.SetBool(espadaEquipadaHash, false);
 
 
-            // Habilita a espada caso n�o esteja e desabilita caso esteja
+            // Habilita a espada caso n�o esteja e desabilita caso esteja
             bool estadoAtual = armaPersonagemBesta.activeSelf;
             armaPersonagemBesta.SetActive(!estadoAtual);
             animator.SetBool(bestaEquipadaHash, !estadoAtual);
@@ -193,20 +213,21 @@ public class controlarPersonagem : MonoBehaviour
             {
                 Collider[] inimigosAcertados = Physics.OverlapSphere(pontoDeAtaque.position, alcanceDeAtaque, camadaInimigos);
 
+                FindObjectOfType<gerenciarAudio>().Reproduzir("somEspadaVento");
+
                 foreach(Collider inimigo in inimigosAcertados)
                 {
                     Debug.Log("Acertamos" + inimigo.name);
                     inimigo.GetComponent<inimigo>().receberDano(danoBase);
+                    FindObjectOfType<gerenciarAudio>().Reproduzir("somEspada");
                 }
             }
 
-            if (bestaEquipada)
+            if (bestaEquipada && Time.time - tempoAtual >= tempoEntreAtaquesBesta)
             {
-                GameObject personagem;
-
-                personagem = GameObject.Find("/Anna Harris");
-
-                personagem.GetComponent<atirarFlecha>().atirar();
+                tempoAtual = Time.time;
+                FindObjectOfType<gerenciarAudio>().Reproduzir("esticandoArco");
+                StartCoroutine(gameObject.GetComponent<atirarFlecha>().atirar());
             }
 
         }
@@ -214,6 +235,8 @@ public class controlarPersonagem : MonoBehaviour
         if (!ataquePressionado && estaAtacando)
         {
             animator.SetBool(estaAtacandoHash, false);
+            FindObjectOfType<gerenciarAudio>().pararReproducao("somEspadaVento");
+
         }
 
     }
@@ -223,22 +246,37 @@ public class controlarPersonagem : MonoBehaviour
         Gizmos.DrawWireSphere(pontoDeAtaque.position, alcanceDeAtaque);
     }
 
+
     void virar()
     {
-        Vector3 posicaoAtual = transform.position;
+        // Angulo de rotação da personagem
+        float angulo = movimentoAtual.x * correcaoRotacao;
 
-        Vector3 novaPosicao = new Vector3(movimentoAtual.x, 0, movimentoAtual.y);
+        // Segue orientação da camera caso não esteja rocionando
+        if (movimentoPressionado && movimentoAtual.x == 0 && usarRotacaoCamera){
+            transform.eulerAngles = FindObjectOfType<CameraManager>().transform.eulerAngles;
+        }
 
-        Vector3 posicaoOlharPara = posicaoAtual + novaPosicao;
+        // Desabilita o uso da camera caso o personagem se movimente lateralmente
+        if (movimentoPressionado && movimentoAtual.x != 0){
+            usarRotacaoCamera = false;
+        }
 
-        transform.LookAt(posicaoOlharPara);
+        // Habilita novamenta caso pare de se movimentar 
+        if(movimentoAtual.y == 0 && movimentoAtual.x == 0){
+            usarRotacaoCamera = true;
+        }
+
+        // Rotaciona em relação ao eixo y
+        transform.Rotate(Vector3.up, angulo);
     }
 
     public void receberDano(int dano)
     {
         vidaAtual -= dano;
+        FindObjectOfType<gerenciarAudio>().Reproduzir("dano");
 
-        if (vidaAtual <= 0)
+        if (vidaAtual <= 0 && animator.GetBool(estaVivoHash))
         {
             morrer();
         }
@@ -248,8 +286,21 @@ public class controlarPersonagem : MonoBehaviour
     {
         Debug.Log("Personagem " + transform.name + " morreu");
         animator.SetBool(estaVivoHash, false);
-        FindObjectOfType<gerenciarAudio>().Reproduzir("SomDeMorteFeminino");
+        animator.SetBool(estaVivoHash, false);
 
+        animator.SetBool(estaAndandoHash, false);
+        animator.SetBool(estaCorrendoHash, false);
+        animator.SetBool(estaAtacandoHash, false);
+        FindObjectOfType<gerenciarAudio>().Reproduzir("SomDeMorteFeminino");
+        Invoke("reiniciar", 3);
+    }
+         
+
+    
+        
+
+    void reiniciar(){
+         SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex ) ;
     }
 
     void OnEnable()
@@ -260,5 +311,16 @@ public class controlarPersonagem : MonoBehaviour
     void OnDisable()
     {
         entrada.Personagem.Disable();
+    }
+
+       private void LateUpdate()
+    {
+        cameraManager.HandleAllCameraMovement();
+    }
+
+     private void HandleCameraInput()
+    {
+        cameraInputX = cameraInput.x;
+        cameraInputY = cameraInput.y;
     }
 }

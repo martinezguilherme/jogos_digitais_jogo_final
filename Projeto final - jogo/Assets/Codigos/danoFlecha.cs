@@ -20,6 +20,10 @@ public class danoFlecha : MonoBehaviour
             Debug.Log("Acertamos com flecha: " + inimigo.name);
             inimigo.GetComponent<inimigo>().receberDano(danoBaseFlecha);
 
+            
+            FindObjectOfType<gerenciarAudio>().Reproduzir("flechaImpacto");
+
+
             // Destroi a flecha após acertar um inimigo
             DestroyImmediate(gameObject);
         }

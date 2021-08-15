@@ -9,6 +9,7 @@ public class PlayerLocomotion : MonoBehaviour
     InputManager inputManager;
     Vector3 moveDirection;
     Transform cameraObject;
+    matar matar;
     public Rigidbody playerRigidBody;
     public float walkingSpeed = 3;
     public float sprintingSpeed = 6;
@@ -24,6 +25,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Awake()
     {
+        matar = GetComponent<matar>();
         animatorManager = GetComponent<AnimatorManager>();
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
@@ -76,7 +78,6 @@ public class PlayerLocomotion : MonoBehaviour
         HandleFallingAndLanding();
         if (playerManager.isInteracting && !playerManager.isUsingRootMotion)
         {
-            Debug.Log("a");
             return;
         }
         HandleMovement();
@@ -127,7 +128,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (playerManager.isInteracting)
             return;
         animatorManager.PlayTargetAnimation("defendendo", true);
-        
+        matar.atacarEscudo();
 
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class inimigo : MonoBehaviour
 {
 
+    SkeletonMovement skeletonMovement;
     public LayerMask camadaAlvos;
 
     public int vidaMaxima = 100;
@@ -12,22 +13,30 @@ public class inimigo : MonoBehaviour
 
     public float alcanceAtaque = 20;
 
-    int danoBase = 20;
+    public int danoBase = 20;
 
     // Start is called before the first frame update
     void Start()
     {
+        skeletonMovement = GetComponent<SkeletonMovement>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         vidaAtual = vidaMaxima;
     }
 
-    void atacar()
+    public void atacar()
     {
         Collider[] personagemAcertados = Physics.OverlapSphere(transform.position, alcanceAtaque, camadaAlvos);
 
         foreach (Collider personagem in personagemAcertados)
         {
             Debug.Log("Acertamos" + personagem.name);
-            personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
+            if(personagem.GetComponent<controlarPersonagem>() != null && personagem.GetComponent<controlarPersonagem>().vidaAtual > 0){
+                personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
+            }else if(personagem.GetComponent<PlayerManager>() != null && personagem.GetComponent<PlayerManager>().vidaAtual > 0)
+            {
+                personagem.GetComponent<PlayerManager>().receberDano(danoBase);
+            }
         }
     }
 
@@ -44,7 +53,8 @@ public class inimigo : MonoBehaviour
     void morrer()
     {
         Debug.Log("Inimigo " + transform.name + " morreu");
-        // Chamar aqui a animação de morte do personagem
+        skeletonMovement.vivo = false;
+        FindObjectOfType<gerenciarAudio>().Reproduzir("skeletonMorte");
     }
 
     // Update is called once per frame
