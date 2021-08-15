@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
  public InputManager inputManager;
+ public controlarPersonagem controlarPersonagem;
     
  public Transform targetTransform;
  public Transform cameraPivot;
@@ -31,8 +32,13 @@ public class CameraManager : MonoBehaviour
  }
 
  private void rotateCamera(){
-     lookAngle = lookAngle + (inputManager.cameraInputX * cameraLookSpeed);
-     pivotAngle = pivotAngle - (inputManager.cameraInputY * cameraPivotSpeed);
+     if(inputManager!= null){
+        lookAngle = lookAngle + (inputManager.cameraInputX * cameraLookSpeed);
+        pivotAngle = pivotAngle - (inputManager.cameraInputY * cameraPivotSpeed);
+     }if(controlarPersonagem != null){
+          lookAngle = lookAngle + (controlarPersonagem.cameraInputX * cameraLookSpeed);
+        pivotAngle = pivotAngle - (controlarPersonagem.cameraInputY * cameraPivotSpeed);
+     }
      pivotAngle = Mathf.Clamp(pivotAngle, minimumPivotAngle, maximumPivotAngle);
 
      Vector3 rotation = Vector3.zero;

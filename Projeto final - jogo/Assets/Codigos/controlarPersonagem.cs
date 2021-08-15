@@ -16,6 +16,11 @@ public class controlarPersonagem : MonoBehaviour
 
     Controladorpersonagem entrada;
 
+    CameraManager cameraManager;
+    public Vector2 cameraInput;
+    public float cameraInputX;
+    public float cameraInputY;
+
     Vector2 movimentoAtual;
     bool movimentoPressionado;
     bool correrPressionado;
@@ -39,6 +44,7 @@ public class controlarPersonagem : MonoBehaviour
 
     private void Awake()
     {
+        cameraManager = FindObjectOfType<CameraManager>();
         entrada = new Controladorpersonagem();
         entrada.Personagem.Mover.performed += ctx =>
         {
@@ -49,6 +55,8 @@ public class controlarPersonagem : MonoBehaviour
         entrada.Personagem.Atacar.performed += ctx => ataquePressionado = ctx.ReadValueAsButton();
         entrada.Personagem.Equiparbesta.performed += ctx => equiparBestaPressionado = ctx.ReadValueAsButton();
         entrada.Personagem.Equiparespada.performed += ctx => equiparEspadaPressionado = ctx.ReadValueAsButton();
+
+        entrada.Personagem.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
 
     }
 
@@ -75,6 +83,7 @@ public class controlarPersonagem : MonoBehaviour
         virar();
         atacar();
         trocarEquipamento();
+        HandleCameraInput();
 
     }
 
@@ -151,7 +160,7 @@ public class controlarPersonagem : MonoBehaviour
             animator.SetBool(bestaEquipadaHash, false);
 
 
-            // Habilita a espada caso não esteja e desabilita caso esteja
+            // Habilita a espada caso nï¿½o esteja e desabilita caso esteja
             bool estadoAtual = armaPersonagemEspada.activeSelf;
             armaPersonagemEspada.SetActive(!estadoAtual);
             animator.SetBool(espadaEquipadaHash, !estadoAtual);
@@ -170,7 +179,7 @@ public class controlarPersonagem : MonoBehaviour
             animator.SetBool(espadaEquipadaHash, false);
 
 
-            // Habilita a espada caso não esteja e desabilita caso esteja
+            // Habilita a espada caso nï¿½o esteja e desabilita caso esteja
             bool estadoAtual = armaPersonagemBesta.activeSelf;
             armaPersonagemBesta.SetActive(!estadoAtual);
             animator.SetBool(bestaEquipadaHash, !estadoAtual);
@@ -264,5 +273,16 @@ public class controlarPersonagem : MonoBehaviour
     void OnDisable()
     {
         entrada.Personagem.Disable();
+    }
+
+       private void LateUpdate()
+    {
+        cameraManager.HandleAllCameraMovement();
+    }
+
+     private void HandleCameraInput()
+    {
+        cameraInputX = cameraInput.x;
+        cameraInputY = cameraInput.y;
     }
 }
