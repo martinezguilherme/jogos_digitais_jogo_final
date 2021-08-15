@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public bool isUsingRootMotion;
 
     public int vidaMaxima = 100;
-    int vidaAtual;
+    public int vidaAtual;
 
     private void Awake()
     {

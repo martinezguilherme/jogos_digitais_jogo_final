@@ -33,7 +33,7 @@ public class inimigo : MonoBehaviour
             Debug.Log("Acertamos" + personagem.name);
             if(personagem.GetComponent<controlarPersonagem>() != null && personagem.GetComponent<controlarPersonagem>().vidaAtual > 0){
                 personagem.GetComponent<controlarPersonagem>().receberDano(danoBase);
-            }else if(personagem.GetComponent<PlayerManager>() != null personagem.GetComponent<PlayerManager>().vidaAtual > 0)
+            }else if(personagem.GetComponent<PlayerManager>() != null && personagem.GetComponent<PlayerManager>().vidaAtual > 0)
             {
                 personagem.GetComponent<PlayerManager>().receberDano(danoBase);
             }
