@@ -15,6 +15,7 @@ public class SkeletonMovement : MonoBehaviour
     private float distanciaParaAtacar = 2.7f;
     public AudioSource somMonmstro;
     public GameObject monstroObject;
+    public float velocidade;
 
        void Start()
     {
@@ -39,7 +40,7 @@ public class SkeletonMovement : MonoBehaviour
                 if (direction.magnitude > distanciaParaAtacar && direction.magnitude < distanciaAtrairMonstro)
                 {
                     navComponent.SetDestination(jogador.position);
-                    navComponent.speed = 3f;
+                    navComponent.speed = velocidade;
                     anim.SetBool("andando", true);
                     anim.SetBool("atacando", false);
                 }
