@@ -1289,6 +1289,7 @@ MonoBehaviour:
   vivo: 1
   jogador: {fileID: 2114577324}
   monstro: {fileID: 869038913}
+  distanciaParaAtacar: 1
   somMonmstro: {fileID: 869038909}
   monstroObject: {fileID: 869038905}
   velocidade: 1.5

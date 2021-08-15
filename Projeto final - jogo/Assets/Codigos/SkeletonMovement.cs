@@ -12,7 +12,7 @@ public class SkeletonMovement : MonoBehaviour
     public Transform jogador;
     public Transform monstro;
     private Animator anim;
-    private float distanciaParaAtacar = 2.7f;
+    public float distanciaParaAtacar = 2.7f;
     public AudioSource somMonmstro;
     public GameObject monstroObject;
     public float velocidade;

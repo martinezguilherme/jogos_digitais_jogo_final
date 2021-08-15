@@ -166,8 +166,10 @@ MonoBehaviour:
   vivo: 1
   jogador: {fileID: 1177160792}
   monstro: {fileID: 219017605}
+  distanciaParaAtacar: 2.7
   somMonmstro: {fileID: 219017610}
   monstroObject: {fileID: 219017603}
+  velocidade: 3
 --- !u!195 &219017609
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -568,8 +570,10 @@ MonoBehaviour:
   vivo: 1
   jogador: {fileID: 1177160792}
   monstro: {fileID: 416646447}
+  distanciaParaAtacar: 2.7
   somMonmstro: {fileID: 416646443}
   monstroObject: {fileID: 416646438}
+  velocidade: 2
 --- !u!114 &416646442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3128,8 +3132,10 @@ MonoBehaviour:
   vivo: 1
   jogador: {fileID: 1177160792}
   monstro: {fileID: 1916705792}
+  distanciaParaAtacar: 2.7
   somMonmstro: {fileID: 1916705788}
   monstroObject: {fileID: 1916705783}
+  velocidade: 4
 --- !u!114 &1916705787
 MonoBehaviour:
   m_ObjectHideFlags: 0
