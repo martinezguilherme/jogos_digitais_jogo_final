@@ -8,6 +8,7 @@ public class inimigo : MonoBehaviour
     SkeletonMovement skeletonMovement;
     public LayerMask camadaAlvos;
     public GameObject inimigoObject;
+    public AudioSource somMorte;
 
     public int vidaMaxima = 100;
     int vidaAtual;
@@ -52,6 +53,7 @@ public class inimigo : MonoBehaviour
 
     void morrer()
     {
+        somMorte.Play();
         Debug.Log("Inimigo " + transform.name + " morreu");
         skeletonMovement.vivo = false;
     }

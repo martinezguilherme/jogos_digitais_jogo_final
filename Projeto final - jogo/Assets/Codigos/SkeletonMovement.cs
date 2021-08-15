@@ -70,8 +70,8 @@ public class SkeletonMovement : MonoBehaviour
             anim.SetBool("morto", true);
             anim.SetBool("parado", false);
             anim.SetBool("andando", false);
-            anim.SetBool("atacando", false);
-            Invoke("Morrer", 3);
+            anim.SetBool("atacando", false);          
+            Invoke("Morrer", 3);  
         }
  }
 }
