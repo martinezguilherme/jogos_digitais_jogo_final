@@ -1245,6 +1245,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   inimigoObject: {fileID: 0}
+  somMorte: {fileID: 0}
   vidaMaxima: 100
   alcanceAtaque: 20
 --- !u!1 &869038905 stripped
@@ -1286,7 +1287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f0008f8f94e9946a4e6a3d36c66c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempoEntreAtaques: 3
+  tempoEntreAtaques: 1
   vivo: 1
   jogador: {fileID: 2114577324}
   monstro: {fileID: 869038913}
@@ -1310,6 +1311,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   inimigoObject: {fileID: 869038905}
+  somMorte: {fileID: 0}
   vidaMaxima: 100
   alcanceAtaque: 20
 --- !u!82 &869038909
@@ -1419,9 +1421,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!54 &869038911
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2417,7 +2419,7 @@ MonoBehaviour:
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
-    loop: 1
+    loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - nome: somEspadaVento
@@ -3420,6 +3422,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   vidaMaxima: 100
+  vidaAtual: 0
 --- !u!136 &2114577323
 CapsuleCollider:
   m_ObjectHideFlags: 0
