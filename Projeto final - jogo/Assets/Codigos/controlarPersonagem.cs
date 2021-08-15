@@ -33,11 +33,14 @@ public class controlarPersonagem : MonoBehaviour
 
     public Transform pontoDeAtaque;
     public float alcanceDeAtaque = 0.5f;
+    public float correcaoRotacao;
     public int danoBase = 20;
     public LayerMask camadaInimigos;
 
     public int vidaMaxima = 100;
     int vidaAtual;
+
+    bool usarRotacaoCamera = true;
 
 
 
@@ -235,15 +238,29 @@ public class controlarPersonagem : MonoBehaviour
         Gizmos.DrawWireSphere(pontoDeAtaque.position, alcanceDeAtaque);
     }
 
+
     void virar()
     {
-        Vector3 posicaoAtual = transform.position;
+        // Angulo de rotação da personagem
+        float angulo = movimentoAtual.x * correcaoRotacao;
 
-        Vector3 novaPosicao = new Vector3(movimentoAtual.x, 0, movimentoAtual.y);
+        // Segue orientação da camera caso não esteja rocionando
+        if (movimentoPressionado && movimentoAtual.x == 0 && usarRotacaoCamera){
+            transform.eulerAngles = FindObjectOfType<CameraManager>().transform.eulerAngles;
+        }
 
-        Vector3 posicaoOlharPara = posicaoAtual + novaPosicao;
+        // Desabilita o uso da camera caso o personagem se movimente lateralmente
+        if (movimentoPressionado && movimentoAtual.x != 0){
+            usarRotacaoCamera = false;
+        }
 
-        transform.LookAt(posicaoOlharPara);
+        // Habilita novamenta caso pare de se movimentar 
+        if(movimentoAtual.y == 0 && movimentoAtual.x == 0){
+            usarRotacaoCamera = true;
+        }
+
+        // Rotaciona em relação ao eixo y
+        transform.Rotate(Vector3.up, angulo);
     }
 
     public void receberDano(int dano)

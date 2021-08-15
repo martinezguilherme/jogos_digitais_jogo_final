@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33542925, g: 0.40421787, b: 0.48918903, a: 1}
+  m_IndirectSpecularColor: {r: 0.33542916, g: 0.40421918, b: 0.489191, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2738,6 +2738,7 @@ MonoBehaviour:
   cameraInputY: 0
   pontoDeAtaque: {fileID: 1163814791}
   alcanceDeAtaque: 0.5
+  correcaoRotacao: 5
   danoBase: 20
   camadaInimigos:
     serializedVersion: 2
