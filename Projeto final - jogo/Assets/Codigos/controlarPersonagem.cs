@@ -47,6 +47,17 @@ public class controlarPersonagem : MonoBehaviour
     float tempoAtual;
 
 
+    // NPC detection vars
+    private bool interagindo = false;
+    private bool raioInteracao = false;
+    private GameObject triggeringNPC = null;
+    bool interagiu = false;
+
+    // NPC text objectcs
+    public GameObject interactionTooltip;
+    public GameObject npcGreetings;
+    public GameObject npcText;
+
 
 
     private void Awake()
@@ -64,6 +75,10 @@ public class controlarPersonagem : MonoBehaviour
         entrada.Personagem.Equiparespada.performed += ctx => equiparEspadaPressionado = ctx.ReadValueAsButton();
 
         entrada.Personagem.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+        entrada.Personagem.Interagir.performed += i => interagindo = true;
+        entrada.Personagem.Interagir.canceled += i => interagindo = false;
+
 
     }
 
@@ -91,6 +106,7 @@ public class controlarPersonagem : MonoBehaviour
             virar();
             atacar();
             trocarEquipamento();
+            HandleInteractionInput();
 
         }
         
@@ -296,7 +312,6 @@ public class controlarPersonagem : MonoBehaviour
     }
          
 
-    
         
 
     void reiniciar(){
@@ -323,4 +338,47 @@ public class controlarPersonagem : MonoBehaviour
         cameraInputX = cameraInput.x;
         cameraInputY = cameraInput.y;
     }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "NPC")
+        {
+            raioInteracao = true;
+            triggeringNPC = other.gameObject;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+
+        if (other.tag == "NPC")
+        {
+            raioInteracao = false;
+            triggeringNPC = null;
+        }
+    }
+
+    private void HandleInteractionInput()
+    {
+        if (raioInteracao)
+        {
+            print("raio");
+            interactionTooltip.SetActive(true);
+            
+            if (interagindo || interagiu)
+            {
+                npcGreetings.SetActive(false);
+                interactionTooltip.SetActive(false);
+                npcText.SetActive(true);
+                interagiu = true;
+            } 
+        } else {
+            interactionTooltip.SetActive(false);
+            npcText.SetActive(false);
+            interagiu = false;
+        }
+    }
+
+
 }

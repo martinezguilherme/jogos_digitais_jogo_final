@@ -65,6 +65,14 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Interagir"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa962541-0a44-4a72-aff4-9b2b55fe27cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -177,6 +185,17 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""575a0728-5d5d-4725-9107-094b1103bde9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interagir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +210,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         m_Personagem_Equiparespada = m_Personagem.FindAction("Equipar espada", throwIfNotFound: true);
         m_Personagem_Equiparbesta = m_Personagem.FindAction("Equipar besta", throwIfNotFound: true);
         m_Personagem_Camera = m_Personagem.FindAction("Camera", throwIfNotFound: true);
+        m_Personagem_Interagir = m_Personagem.FindAction("Interagir", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +266,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
     private readonly InputAction m_Personagem_Equiparespada;
     private readonly InputAction m_Personagem_Equiparbesta;
     private readonly InputAction m_Personagem_Camera;
+    private readonly InputAction m_Personagem_Interagir;
     public struct PersonagemActions
     {
         private @Controladorpersonagem m_Wrapper;
@@ -256,6 +277,7 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         public InputAction @Equiparespada => m_Wrapper.m_Personagem_Equiparespada;
         public InputAction @Equiparbesta => m_Wrapper.m_Personagem_Equiparbesta;
         public InputAction @Camera => m_Wrapper.m_Personagem_Camera;
+        public InputAction @Interagir => m_Wrapper.m_Personagem_Interagir;
         public InputActionMap Get() { return m_Wrapper.m_Personagem; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +305,9 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                 @Camera.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnCamera;
+                @Interagir.started -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnInteragir;
+                @Interagir.performed -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnInteragir;
+                @Interagir.canceled -= m_Wrapper.m_PersonagemActionsCallbackInterface.OnInteragir;
             }
             m_Wrapper.m_PersonagemActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,6 +330,9 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @Interagir.started += instance.OnInteragir;
+                @Interagir.performed += instance.OnInteragir;
+                @Interagir.canceled += instance.OnInteragir;
             }
         }
     }
@@ -317,5 +345,6 @@ public class @Controladorpersonagem : IInputActionCollection, IDisposable
         void OnEquiparespada(InputAction.CallbackContext context);
         void OnEquiparbesta(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnInteragir(InputAction.CallbackContext context);
     }
 }
