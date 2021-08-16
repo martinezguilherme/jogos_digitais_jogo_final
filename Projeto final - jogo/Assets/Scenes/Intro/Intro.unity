@@ -310,6 +310,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1043176083}
     m_Modifications:
+    - target: {fileID: 4747920290374058777, guid: bfd391a962643204dba2543c79d980cb, type: 3}
+      propertyPath: m_Text
+      value: "1527, Edinburgh, reino de Granada.\n\nAp\xF3s mais de 100 anos de paz,
+        uma tormenta paira sobre os camponeses da cidade.\n\nUma horda de monstros
+        enviados por uma entidade maligna avan\xE7a sobre a cidade e sobre o reino.\n
+        \nGuerreiros e camponeses, mulheres e idosos, se unem contra o mal.\n\nNo
+        meio desse horror, o andarilho protetor Drake se depara com seu maior desafio.\n\nE
+        a guerreira Anna Harris, com sua maior aventura.\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 4747920291260128524, guid: bfd391a962643204dba2543c79d980cb, type: 3}
       propertyPath: m_RootOrder
       value: 1
