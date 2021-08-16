@@ -959,6 +959,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 100
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &219017607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1546,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 50
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &278613723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,6 +2416,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 50
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &392416407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,6 +2611,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 250
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &409572529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2802,6 +2806,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 150
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &412168315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3069,6 +3074,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 150
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &502508673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4899,6 +4905,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 150
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &784114942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,8 +5187,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895551711}
   m_LocalRotation: {x: -0, y: -0.016876834, z: -0, w: 0.9998576}
-  m_LocalPosition: {x: -7.760002, y: -3.155, z: 12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.76, y: -2.9897, z: 12}
+  m_LocalScale: {x: 0.16376184, y: 0.16376184, z: 0.16376184}
   m_Children: []
   m_Father: {fileID: 669341355}
   m_RootOrder: 1
@@ -5195,14 +5202,14 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895551711}
   m_Text: "Experimente as melhorias\nque fiz no seu escudo!\n\nUse o bot\xE3o direito
-    do mouse\npara se defender"
+    do mouse\npara se defender, shift para correr\ne espa\xE7o para rolar"
   m_OffsetZ: 0
   m_CharacterSize: 0.4
   m_LineSpacing: 1
   m_Anchor: 7
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 12
+  m_FontSize: 80
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -5674,6 +5681,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 150
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &920155769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6778,6 +6786,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 100
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &1226400015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8282,6 +8291,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 100
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!82 &1346352100
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8476,6 +8486,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 500
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!82 &1351629070
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9039,7 +9050,7 @@ TextMesh:
   m_Anchor: 7
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 12
+  m_FontSize: 80
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -9095,8 +9106,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431896413}
   m_LocalRotation: {x: -0, y: -0.016876834, z: -0, w: 0.9998576}
-  m_LocalPosition: {x: -7.760002, y: -3.255, z: 12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.760002, y: -3.17, z: 12}
+  m_LocalScale: {x: 0.15799859, y: 0.15799859, z: 0.15799859}
   m_Children: []
   m_Father: {fileID: 669341355}
   m_RootOrder: 0
@@ -9484,6 +9495,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 50
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &1658772737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9915,6 +9927,7 @@ MonoBehaviour:
     m_Bits: 8
   vidaMaxima: 150
   alcanceAtaque: 5
+  danoBase: 20
 --- !u!114 &2027895060
 MonoBehaviour:
   m_ObjectHideFlags: 0
