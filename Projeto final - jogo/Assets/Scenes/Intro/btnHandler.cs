@@ -9,6 +9,11 @@ public class btnHandler : MonoBehaviour
 
     public void iniciar()
     {
-        Application.LoadLevel("Fase 1");
+        SceneManager.LoadScene("Fase 1");
+    }
+
+    public void voltar()
+    {
+        SceneManager.LoadScene("Start");
     }
 }
