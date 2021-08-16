@@ -198,8 +198,9 @@ MonoBehaviour:
     - Prof. M\xE1rio Minami\r\n\r\nProjeto Final - Game Original\r\n\r\nGuilherme
     Gouveia Martinez\r\nLucas Moniz de Arruda\r\nPedro Braga dos Santos Bacellar\r\nSammuel
     Nunes Paes de Barros\r\nAndr\xE9 Bernardino Cardim\r\nDanrley Perez Sena\r\n\r\nUtilizando
-    imagens, sons e assets de:\r\n\r\nPolytope Studio em assetstore.unity.com\r\nTheoTeravainen
-    em freesound.org\r\nklauspillon em deviantart.com"
+    imagens, sons e assets de:\r\n\r\nPolytope Studio em assetstore.unity.com\r\nNox_Sound
+    em assetstore.unity.com\r\nTheoTeravainen em freesound.org\r\nklauspillon em
+    deviantart.com"
 --- !u!222 &58281202
 CanvasRenderer:
   m_ObjectHideFlags: 0
